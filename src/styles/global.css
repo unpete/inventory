@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+strong, b, h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  font-size: 0.95rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  overflow: overlay;
+}
+
+.fa {
+  font-size: smaller;
+}
+
+.gl.margin {
+  margin: 8px;
+}
+
+.gl.margint20 {
+  margin: 8px;
+  margin-top: 20px;
+}
+
+.gl.padding8 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.gl.marginr {
+  margin-right: 8px;
+}
+
+.gl.disabled { pointer-events: none; opacity: 0.4}
+
+.fullscreen {
+  background-color: #fafafa;
+  overflow: auto;
+}
+
+[class*="tb_"] {
+  background-repeat: no-repeat;
+  background-position-top: 4px;
+  width: 24px;
+  height: 24px;
+}
+
+.tb_icon-hand {background-image: url(imgs/icon-hand.png);}
+
