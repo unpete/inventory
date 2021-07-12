@@ -22,17 +22,16 @@
   "proxy": "http://localhost:3016/",
   "dependencies": {
     "md5-file": "^5.0",
-    "metadata-abstract-ui": "2.0.25-beta.2",
-    "metadata-core": "2.0.25-beta.2",
-    "metadata-pouchdb": "2.0.25-beta.2",
-    "metadata-react": "2.0.25-beta.2",
-    "metadata-superlogin": "2.0.25-beta.2",
+    "metadata-abstract-ui": "2.0.25-beta.4",
+    "metadata-core": "2.0.25-beta.4",
+    "metadata-pouchdb": "2.0.25-beta.4",
+    "metadata-react": "2.0.25-beta.4",
+    "metadata-superlogin": "2.0.25-beta.4",
     "react-resize-layout": "^0.2.3",
     "react-router-dom": "^5.2.0",
     "react-treebeard": "^3.2.4",
-    "wb-core": "github:oknosoft/windowbuilder-core#cd9e77285fab0080aada6f10021867ab0295fbd4",
-    "wb-cutting": "github:oknosoft/genetic-cutting#3a8abffb315c005ae46810903ecdfe40aae559f9",
-    "wb-forms": "github:oknosoft/windowbuilder-forms#701960fce2ea621aad7d6a50e78663c3a32c616c"
+    "wb-core": "github:oknosoft/windowbuilder-core#cc7b70a1516c0700174a5b9754ea62f367d40900",
+    "wb-forms": "github:oknosoft/windowbuilder-forms#8112473d5eabf1f76f8f39c76583cf0589c076d8"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
