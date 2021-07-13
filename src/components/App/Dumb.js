@@ -14,13 +14,10 @@ function Dumb() {
       <nav>
         <ul>
           <li>
-            <Link to="/builder/451cbad0-56a7-11eb-9514-9ba96818525f">Изделие №1</Link>
+            <Link to="/cuts/list">Инвентаризация обрези</Link>
           </li>
           <li>
-            <Link to="/builder/40789300-616f-11eb-9222-1d45fd01bf54">Изделие №2</Link>
-          </li>
-          <li>
-            <Link to="/templates">Выбор шаблона</Link>
+            <Link to="/goods/list">Инвентаризация товаров</Link>
           </li>
         </ul>
       </nav>
