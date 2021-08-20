@@ -16,28 +16,28 @@ class AppRouter extends React.Component {
 
   render() {
     return <Router history={history}>
-      <Switch>
-        <Route
-          path={'/cuts/:ref([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'}
-          render={(props) => <InventoryCutsObj {...this.props} {...props} handleNavigate={handleNavigate}/>}
-        />
-        <Route
-          path={'/cuts/list'}
-          render={(props) => <InventoryCutsList {...this.props} {...props} handleNavigate={handleNavigate}/>}
-        />
-        <Route
-          path={'/goods/:ref([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'}
-          render={(props) => <InventoryGoodsObj {...this.props} {...props} handleNavigate={handleNavigate}/>}
-        />
-        <Route
-          path={'/goods/list'}
-          render={(props) => <InventoryGoodsList {...this.props} {...props} handleNavigate={handleNavigate}/>}
-        />
-        <Route>
-          <Dumb />
-        </Route>
-      </Switch>
-    </Router>;
+        <Switch>
+          <Route
+            path={'/cuts/:ref([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'}
+            render={(props) => <InventoryCutsObj {...this.props} {...props} handleNavigate={handleNavigate}/>}
+          />
+          <Route
+            path={'/cuts/list'}
+            render={(props) => <InventoryCutsList {...this.props} {...props} handleNavigate={handleNavigate}/>}
+          />
+          <Route
+            path={'/goods/:ref([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'}
+            render={(props) => <InventoryGoodsObj {...this.props} {...props} handleNavigate={handleNavigate}/>}
+          />
+          <Route
+            path={'/goods/list'}
+            render={(props) => <InventoryGoodsList {...this.props} {...props} handleNavigate={handleNavigate}/>}
+          />
+          <Route>
+            <Dumb />
+          </Route>
+        </Switch>
+      </Router>;
   }
 
   getChildContext() {

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export const useStyles = makeStyles({
   root: {
     width: '50vw',
+    fontSize: 'large',
   },
   loading: {
     textAlign: 'center',

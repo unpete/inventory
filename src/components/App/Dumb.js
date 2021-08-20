@@ -9,15 +9,14 @@ function Dumb() {
   const classes = useStyles();
   return <header className={classes.header}>
     <div className={classes.root}>
-      <h3>В url отсутствует ссылка на изделие или шаблон</h3>
-      <p>Используйте для отладки:</p>
+      <h3>Инвентаризация:</h3>
       <nav>
         <ul>
           <li>
-            <Link to="/cuts/list">Инвентаризация обрези</Link>
+            <Link to="/cuts/list">НЗП и обрези</Link>
           </li>
           <li>
-            <Link to="/goods/list">Инвентаризация товаров</Link>
+            <Link to="/goods/list">Товаров на складе</Link>
           </li>
         </ul>
       </nav>
