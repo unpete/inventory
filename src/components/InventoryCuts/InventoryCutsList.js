@@ -3,10 +3,19 @@ import React from 'react';
 import {DynList} from 'metadata-react/DynList/DynList';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-export default function InventoryCutsList() {
+export default function InventoryCutsList(props) {
 
   const {utils, doc: {inventory_cuts}} = $p;
-  const prm = {};// $p.utils.prm();
+  const prm = utils.prm();
+
+  const handleEdit = ({ref}) => {
+    props.handleNavigate(`/cuts/${ref}`);
+  };
+
+  const handleAdd = (_mgr, event) => {
+    const ref = utils.generate_guid();
+    props.handleNavigate(`/cuts/${ref}`);
+  };
 
   return <div style={{width: '100vw', height: '100vh'}}>
     <DynList
@@ -14,12 +23,12 @@ export default function InventoryCutsList() {
       _mgr={inventory_cuts}
       _acl={'e'}
       _ref={prm.ref}
-      handlers={{}}
+      handlers={{handleEdit, handleAdd}}
       //onRowSelect={this.handleRowSelect}
       //find_rows={_mgr.find_rows_custom}
       setting_in_menu
       //selectionMode
-      //denyAddDel
+      denyDel
       //show_variants
       //btns={}
       //registerFilterChange={this.registerFilterChange}
