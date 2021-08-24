@@ -48,21 +48,20 @@ class InventoryCutsObj extends DataObj {
   }
 
   renderHead(_obj, classes) {
-    return [
-      <FormGroup row key="group_sys">
+    return <>
+      <FormGroup row>
         <DataField _obj={_obj} _fld="number_doc"/>
         <DataField _obj={_obj} _fld="date"/>
-      </FormGroup>,
-      <FormGroup row key="row1">
+      </FormGroup>
+      <FormGroup row>
         <DataField _obj={_obj} _fld="transactions_kind"/>
         <DataField _obj={_obj} _fld="work_center"/>
-      </FormGroup>,
-      <FormGroup row key="row1">
+      </FormGroup>
+      <FormGroup row>
         <DataField _obj={_obj} _fld="responsible"/>
-        <DataField key="note" _obj={_obj} _fld="note" />
-      </FormGroup>,
-
-    ];
+        <DataField _obj={_obj} _fld="note" />
+      </FormGroup>
+    </>;
   }
 
   // get Toolbar() {
