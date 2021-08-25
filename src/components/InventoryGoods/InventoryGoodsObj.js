@@ -55,9 +55,26 @@ class InventoryGoodsObj extends DataObj {
     return null;
   }
 
+  handleAdd = () => {
+    const {_obj} = this.state;
+    /* eslint-disable-next-line */
+    const row = _obj.goods.add({cnstr: -elm});
+  };
+
   renderMaterials() {
     const {scheme, state: {_obj}} = this;
-    return 'Materials';
+    return <TabularSection
+      _obj={_obj}
+      _meta={this._meta}
+      _tabular="goods"
+      scheme={this.scheme}
+      minHeight={180}
+      //denyAddDel
+      denyReorder
+      //btns={this.btns()}
+      //onCellSelected={this.rowUpdate}
+      //onRowUpdated={this.defferedUpdate}
+    />;
   }
 
   renderHead() {

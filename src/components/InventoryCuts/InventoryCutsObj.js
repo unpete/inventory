@@ -42,12 +42,13 @@ class InventoryCutsObj extends DataObj {
         <Tab label={<Tip title="Реквизиты"><i className="fa fa-file-text-o fa-fw"></i></Tip>}/>
         <Tab label={<Tip title="Материалы"><i className="fa fa-object-ungroup fa-fw"></i></Tip>}/>
       </Tabs>
-      {tab === 0 && this.renderHead(_obj, classes)}
-      {tab === 1 && null}
+      {tab === 0 && this.renderHead()}
+      {tab === 1 && this.renderMaterials()}
     </div>;
   }
 
-  renderHead(_obj, classes) {
+  renderHead() {
+    const {_obj} = this.state;
     return <>
       <FormGroup row>
         <DataField _obj={_obj} _fld="number_doc"/>
@@ -64,12 +65,35 @@ class InventoryCutsObj extends DataObj {
     </>;
   }
 
+
+  renderMaterials() {
+    const {scheme, state: {_obj}} = this;
+    return <TabularSection
+      _obj={_obj}
+      _meta={this._meta}
+      _tabular="materials"
+      scheme={this.scheme}
+      minHeight={180}
+      //denyAddDel
+      denyReorder
+      //btns={this.btns()}
+      //onCellSelected={this.rowUpdate}
+      //onRowUpdated={this.defferedUpdate}
+    />;
+  }
+
   // get Toolbar() {
   //   return DataObjToolbar;
   // }
 
   handleChangeTab = (event, tab) => {
     this.setState({tab});
+  };
+
+  handleAdd = () => {
+    const {_obj} = this.state;
+    /* eslint-disable-next-line */
+    const row = _obj.materials.add({});
   };
 
   renderTabularSections() {
