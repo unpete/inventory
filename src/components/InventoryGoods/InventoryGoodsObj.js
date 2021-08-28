@@ -2,8 +2,8 @@
 import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
-import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 
 import DataField from 'metadata-react/DataField';
 import TabularSection from 'metadata-react/TabularSection';
@@ -19,6 +19,9 @@ class InventoryGoodsObj extends DataObj {
     super(props, context);
 
     this.state.tab = 0;
+    this.state.edit_row = null;
+    this.prev = {};
+
     $p.cat.scheme_settings.find_rows({obj: 'doc.inventory_goods.goods'}, (scheme) => {
       if(scheme.name.endsWith('main')) {
         this.scheme = scheme;
@@ -30,12 +33,21 @@ class InventoryGoodsObj extends DataObj {
     this.setState({tab});
   };
 
+  handleClose() {
+    const {state: {_obj}, props: {handlers}} = this;
+    handlers.handleNavigate(`/goods/list${_obj ? '/?ref=' + _obj.ref : ''}`);
+  }
+
   renderFields() {
-    const {state: {_obj, tab}, props: {handlers, classes, height}}  = this;
+    const {state: {_obj, tab, edit_row}, props: {handlers, classes, height}}  = this;
     let h1 = height < 420 ? 420 : height;
     h1 -= 146;
 
-    return <div style={{paddingBottom: 32}}>
+    if(edit_row) {
+      return this.renderEdit();
+    }
+
+    return <>
       <Tabs
         value={tab}
         onChange={this.handleChangeTab}
@@ -48,7 +60,7 @@ class InventoryGoodsObj extends DataObj {
       </Tabs>
       {tab === 0 && this.renderHead()}
       {tab === 1 && this.renderMaterials()}
-    </div>;
+    </>;
   }
 
   renderTabularSections() {
@@ -58,23 +70,45 @@ class InventoryGoodsObj extends DataObj {
   handleAdd = () => {
     const {_obj} = this.state;
     /* eslint-disable-next-line */
-    const row = _obj.goods.add({cnstr: -elm});
+    const edit_row = _obj.goods.add(Object.assign({}, this.prev));
+    this.setState({edit_row});
   };
+
+  handleEdit = () => {
+    const {_materials, state: {_obj}} = this;
+    if(_materials) {
+      const {_tabular, selected} = _materials.state;
+      if(selected && selected.hasOwnProperty('rowIdx')) {
+        const edit_row = _materials.rowGetter(selected.rowIdx);
+        this.setState({edit_row});
+      }
+    }
+  };
+
+  renderEdit() {
+    return 'renderEdit';
+  }
 
   renderMaterials() {
     const {scheme, state: {_obj}} = this;
-    return <TabularSection
-      _obj={_obj}
-      _meta={this._meta}
-      _tabular="goods"
-      scheme={this.scheme}
-      minHeight={180}
-      //denyAddDel
-      denyReorder
-      //btns={this.btns()}
-      //onCellSelected={this.rowUpdate}
-      //onRowUpdated={this.defferedUpdate}
-    />;
+    return <div style={{height: 'calc(100vh - 120px)'}}>
+      <TabularSection
+        _obj={_obj}
+        _meta={this._meta}
+        _tabular="goods"
+        scheme={this.scheme}
+        //minHeight={180}
+        //denyAddDel
+        denyReorder
+        ref={(el) => this._materials = el}
+        btns={[
+          <IconButton key="as1" disabled>|</IconButton>,
+          <IconButton key="ed1" onClick={this.handleEdit} title="Редактировать строку"><EditIcon /></IconButton>
+        ]}
+        //onCellSelected={this.rowUpdate}
+        //onRowUpdated={this.defferedUpdate}
+      />
+    </div>;
   }
 
   renderHead() {

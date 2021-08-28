@@ -31,7 +31,7 @@ class InventoryCutsObj extends DataObj {
     let h1 = height < 420 ? 420 : height;
     h1 -= 146;
 
-    return <div style={{paddingBottom: 32}}>
+    return <>
       <Tabs
         value={tab}
         onChange={this.handleChangeTab}
@@ -44,7 +44,7 @@ class InventoryCutsObj extends DataObj {
       </Tabs>
       {tab === 0 && this.renderHead()}
       {tab === 1 && this.renderMaterials()}
-    </div>;
+    </>;
   }
 
   renderHead() {
@@ -68,18 +68,20 @@ class InventoryCutsObj extends DataObj {
 
   renderMaterials() {
     const {scheme, state: {_obj}} = this;
-    return <TabularSection
-      _obj={_obj}
-      _meta={this._meta}
-      _tabular="materials"
-      scheme={this.scheme}
-      minHeight={180}
-      //denyAddDel
-      denyReorder
-      //btns={this.btns()}
-      //onCellSelected={this.rowUpdate}
-      //onRowUpdated={this.defferedUpdate}
-    />;
+    return <div style={{height: 'calc(100vh - 120px)'}}>
+      <TabularSection
+        _obj={_obj}
+        _meta={this._meta}
+        _tabular="materials"
+        scheme={this.scheme}
+        //minHeight={180}
+        //denyAddDel
+        denyReorder
+        //btns={this.btns()}
+        //onCellSelected={this.rowUpdate}
+        //onRowUpdated={this.defferedUpdate}
+      />
+    </div>;
   }
 
   // get Toolbar() {
@@ -89,6 +91,11 @@ class InventoryCutsObj extends DataObj {
   handleChangeTab = (event, tab) => {
     this.setState({tab});
   };
+
+  handleClose() {
+    const {state: {_obj}, props: {handlers}} = this;
+    handlers.handleNavigate(`/cuts/list${_obj ? '/?ref=' + _obj.ref : ''}`);
+  }
 
   handleAdd = () => {
     const {_obj} = this.state;

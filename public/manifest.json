@@ -1,18 +1,18 @@
 {
   "lang": "ru",
   "name": "Инвентаризация для Заказа дилера",
-  "short_name": "Inventory",
+  "short_name": "Инвентаризация",
   "description": "Инвентаризация товаров и деловой обрези",
   "icons": [
     {
-      "src": "./imgs/fav-okn144.png",
-      "sizes": "144x144",
+      "src": "./imgs/splash.png",
+      "sizes": "256x256",
       "type": "image/png"
     }],
   "background_color": "#ffffff",
   "splash_screens": [{
-    "src": "./imgs/splash.gif",
-    "sizes": "256x64"
+    "src": "./imgs/splash.png",
+    "sizes": "256x256"
   }],
   "scope": "/",
   "start_url": "/",

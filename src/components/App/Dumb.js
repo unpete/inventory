@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 
 import {useStyles} from './Loading';
 
@@ -9,7 +10,7 @@ function Dumb() {
   const classes = useStyles();
   return <header className={classes.header}>
     <div className={classes.root}>
-      <h3>Инвентаризация:</h3>
+      <h3 className={classes.h3}><PlaylistAddCheckIcon fontSize="large"/> Инвентаризация:</h3>
       <nav>
         <ul>
           <li>

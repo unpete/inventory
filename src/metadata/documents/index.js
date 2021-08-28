@@ -4,9 +4,11 @@
 import doc_calc_order from './doc_calc_order';
 import doc_calc_order_print from './doc_calc_order_print';
 import inventory_cuts_row from './inventory_cuts_row';
+import inventory_goods_row from './inventory_goods_row';
 
 export default function ($p) {
   doc_calc_order($p);
   doc_calc_order_print($p);
   inventory_cuts_row($p);
+  inventory_goods_row($p);
 }
