@@ -6,8 +6,8 @@
 
 export default function inventory_goods_row($p) {
 
-  const {DocInventory_goodsGoodsRow: Proto, utils, doc: {inventory_cuts}, cat: {characteristics, clrs}} = $p;
-  const {fields} = inventory_cuts.metadata('materials');
+  const {DocInventory_goodsGoodsRow: Proto, utils, doc: {inventory_goods}, cat: {characteristics, clrs}} = $p;
+  const {fields} = inventory_goods.metadata('goods');
   fields.clr = utils._clone(characteristics.metadata('clr'));
 
   class DocInventory_goodsGoodsRow extends Proto {
@@ -17,6 +17,11 @@ export default function inventory_goods_row($p) {
     }
 
     set clr(clr) {
+      if(!clr || clr.empty()) {
+        this.nom_characteristic = '';
+        return;
+      }
+
       const {nom, nom_characteristic} = this;
       if(nom_characteristic.clr == clr) {
         return;

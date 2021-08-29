@@ -30,7 +30,7 @@
     "react-resize-layout": "^0.2.3",
     "react-router-dom": "^5.2.0",
     "react-treebeard": "^3.2.4",
-    "wb-core": "github:oknosoft/windowbuilder-core#71f687ac6e07000f3a9677f00e7d3d7e61fa85c9",
+    "wb-core": "github:oknosoft/windowbuilder-core#22faa420bd9f820b01c3a3ab495d19e2522843f4",
     "wb-forms": "github:oknosoft/windowbuilder-forms#8112473d5eabf1f76f8f39c76583cf0589c076d8"
   },
   "devDependencies": {

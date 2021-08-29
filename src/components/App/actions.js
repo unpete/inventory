@@ -17,7 +17,7 @@ export const init_state = {
   idle: false,
   page: {},
   offline: false,
-  title: 'Редактор изделия',
+  title: 'Инвентаризация',
   error: null,
   user: {
     logged_in: false,

@@ -4,14 +4,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
-
 import DataField from 'metadata-react/DataField';
 import TabularSection from 'metadata-react/TabularSection';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
-
 import Tip from 'wb-forms/dist/Common/Tip';
 import {Tabs, Tab} from 'wb-forms/dist/Common/AntTabs';
+import {Helmet} from 'react-helmet';
+
+import InventoryGoodsRow from './InventoryGoodsRow';
 
 class InventoryGoodsObj extends DataObj {
 
@@ -21,6 +22,7 @@ class InventoryGoodsObj extends DataObj {
     this.state.tab = 0;
     this.state.edit_row = null;
     this.prev = {};
+    this.denyDel = true;
 
     $p.cat.scheme_settings.find_rows({obj: 'doc.inventory_goods.goods'}, (scheme) => {
       if(scheme.name.endsWith('main')) {
@@ -39,15 +41,12 @@ class InventoryGoodsObj extends DataObj {
   }
 
   renderFields() {
-    const {state: {_obj, tab, edit_row}, props: {handlers, classes, height}}  = this;
+    const {state: {_obj, tab, edit_row}, props: {handlers, classes, height, title}}  = this;
     let h1 = height < 420 ? 420 : height;
     h1 -= 146;
 
-    if(edit_row) {
-      return this.renderEdit();
-    }
-
     return <>
+      <Helmet key="helmet" title={title}/>
       <Tabs
         value={tab}
         onChange={this.handleChangeTab}
@@ -55,11 +54,11 @@ class InventoryGoodsObj extends DataObj {
         textColor="primary"
         variant="scrollable"
       >
-        <Tab label={<Tip title="Реквизиты"><i className="fa fa-file-text-o fa-fw"></i></Tip>}/>
-        <Tab label={<Tip title="Материалы"><i className="fa fa-object-ungroup fa-fw"></i></Tip>}/>
+        <Tab label={<Tip title="Реквизиты"><i className="fa fa-file-text-o fa-fw"></i> Шапка</Tip>}/>
+        <Tab label={<Tip title="Материалы"><i className="fa fa-object-ungroup fa-fw"></i> Материалы</Tip>}/>
       </Tabs>
       {tab === 0 && this.renderHead()}
-      {tab === 1 && this.renderMaterials()}
+      {tab === 1 && (edit_row ? <InventoryGoodsRow row={edit_row} handleClose={this.handleResetEdit}/> : this.renderMaterials())}
     </>;
   }
 
@@ -74,6 +73,10 @@ class InventoryGoodsObj extends DataObj {
     this.setState({edit_row});
   };
 
+  handleResetEdit = () => {
+    this.setState({edit_row: null});
+  };
+
   handleEdit = () => {
     const {_materials, state: {_obj}} = this;
     if(_materials) {
@@ -85,8 +88,16 @@ class InventoryGoodsObj extends DataObj {
     }
   };
 
-  renderEdit() {
-    return 'renderEdit';
+  renderHead() {
+    const {_obj} = this.state;
+    return <div style={{maxWidth: 600}}>
+      <DataField _obj={_obj} _fld="number_doc" fullWidth/>
+      <DataField _obj={_obj} _fld="date" fullWidth/>
+      <DataField _obj={_obj} _fld="organization" fullWidth/>
+      <DataField _obj={_obj} _fld="warehouse" fullWidth/>
+      <DataField _obj={_obj} _fld="responsible" fullWidth/>
+      <DataField _obj={_obj} _fld="note" fullWidth/>
+    </div>;
   }
 
   renderMaterials() {
@@ -109,24 +120,6 @@ class InventoryGoodsObj extends DataObj {
         //onRowUpdated={this.defferedUpdate}
       />
     </div>;
-  }
-
-  renderHead() {
-    const {_obj} = this.state;
-    return <>
-      <FormGroup row>
-        <DataField _obj={_obj} _fld="number_doc"/>
-        <DataField _obj={_obj} _fld="date"/>
-      </FormGroup>
-      <FormGroup row>
-        <DataField _obj={_obj} _fld="organization"/>
-        <DataField _obj={_obj} _fld="warehouse"/>
-      </FormGroup>
-      <FormGroup row>
-        <DataField _obj={_obj} _fld="responsible"/>
-        <DataField _obj={_obj} _fld="note" />
-      </FormGroup>
-    </>;
   }
 
   // get Toolbar() {

@@ -1,20 +1,25 @@
 
 import React from 'react';
 import {DynList} from 'metadata-react/DynList/DynList';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import CloseBtn from 'wb-forms/dist/Common/CloseBtn';
 
-export default function InventoryCutsList(props) {
+export default function InventoryCutsList({title, handleNavigate, handleIfaceState}) {
 
   const {utils, doc: {inventory_cuts}} = $p;
   const prm = utils.prm();
 
   const handleEdit = ({ref}) => {
-    props.handleNavigate(`/cuts/${ref}`);
+    handleNavigate(`/cuts/${ref}`);
   };
 
   const handleAdd = (_mgr, event) => {
     const ref = utils.generate_guid();
-    props.handleNavigate(`/cuts/${ref}`);
+    handleNavigate(`/cuts/${ref}`);
+  };
+
+  const handleClose = (_mgr, event) => {
+    const ref = utils.generate_guid();
+    handleNavigate(`/`);
   };
 
   return <div style={{width: '100vw', height: '100vh'}}>
@@ -30,10 +35,11 @@ export default function InventoryCutsList(props) {
       //selectionMode
       denyDel
       //show_variants
-      //btns={}
+      alter_end_btns={<CloseBtn handleClose={handleClose}/>}
       //registerFilterChange={this.registerFilterChange}
       show_search
-      ignoreTitle
+      title={title}
+      handleIfaceState={handleIfaceState}
       height={window.innerHeight - 8}
       width={window.innerWidth - 8}
     />
