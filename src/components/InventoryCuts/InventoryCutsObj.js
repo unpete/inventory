@@ -53,8 +53,8 @@ class InventoryCutsObj extends DataObj {
         textColor="primary"
         variant="scrollable"
       >
-        <Tab label={<Tip title="Реквизиты"><i className="fa fa-file-text-o fa-fw"></i></Tip>}/>
-        <Tab label={<Tip title="Материалы"><i className="fa fa-object-ungroup fa-fw"></i></Tip>}/>
+        <Tab label={<Tip title="Реквизиты"><i className="fa fa-file-text-o fa-fw"></i> Шапка</Tip>}/>
+        <Tab label={<Tip title="Материалы"><i className="fa fa-object-ungroup fa-fw"></i> Материалы</Tip>}/>
       </Tabs>
       {tab === 0 && this.renderHead()}
       {tab === 1 && (edit_row ? <InventoryCutsRow row={edit_row} handleClose={this.handleResetEdit}/> : this.renderMaterials())}
@@ -117,7 +117,11 @@ class InventoryCutsObj extends DataObj {
         //minHeight={180}
         //denyAddDel
         denyReorder
-        //btns={this.btns()}
+        ref={(el) => this._materials = el}
+        btns={[
+          <IconButton key="as1" disabled>|</IconButton>,
+          <IconButton key="ed1" onClick={this.handleEdit} title="Редактировать строку"><EditIcon /></IconButton>
+        ]}
         //onCellSelected={this.rowUpdate}
         //onRowUpdated={this.defferedUpdate}
       />

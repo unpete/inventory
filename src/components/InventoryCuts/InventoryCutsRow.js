@@ -15,6 +15,14 @@ const cache = {old: {}, new: {}};
 export default function InventoryCutsRow({row, handleClose}) {
 
   const classes = styles();
+  const {utils, cat} = $p;
+  const cmeta = utils._clone(row._metadata('clr'));
+  const list = new Set;
+  cat.characteristics.find_rows({owner: row.nom}, (o) => list.add(o.clr));
+  cmeta.choice_params = [{
+    name: "ref",
+    path: {in: Array.from(list)}
+  }];
 
   return <>
     <Toolbar disableGutters>
@@ -28,7 +36,7 @@ export default function InventoryCutsRow({row, handleClose}) {
     <div style={{maxWidth: 600}}>
       <DataField _obj={row} _fld="nom" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="characteristic" isTabular={false} fullWidth/>
-      <DataField _obj={row} _fld="clr" isTabular={false} fullWidth/>
+      <DataField _obj={row} _fld="clr" _meta={cmeta} isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="quantity" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="width" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="height" isTabular={false} fullWidth/>

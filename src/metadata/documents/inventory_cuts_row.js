@@ -6,7 +6,7 @@
 
 export default function inventory_cuts_row($p) {
 
-  const {DocInventory_cutsMaterialsRow: Proto, utils, doc: {inventory_cuts}, cat: {characteristics, clrs}} = $p;
+  const {DocInventory_cutsMaterialsRow: Proto, utils, doc: {inventory_cuts}, cat: {characteristics, clrs, nom}} = $p;
   const {fields} = inventory_cuts.metadata('materials');
   fields.clr = utils._clone(characteristics.metadata('clr'));
 
@@ -17,13 +17,20 @@ export default function inventory_cuts_row($p) {
     }
 
     set clr(clr) {
-      const {nom, characteristic} = this;
-      if(characteristic.clr == clr) {
+      const {nom, characteristic, _data} = this;
+      if(_data._loading || (characteristic.owner === nom && characteristic.clr == clr)) {
         return;
       }
       const cx = characteristics.find({owner: nom, clr});
-      if(cx) {
-        this.characteristic = cx;
+      this.characteristic = cx ? cx : '';
+    }
+
+    // при изменении реквизита
+    value_change(field, type, value) {
+      if(field == 'nom') {
+        const v = nom.get(value);
+        this.unit = v.storage_unit;
+        this.clr = this.characteristic.clr;
       }
     }
   }
