@@ -74,6 +74,12 @@ class InventoryGoodsObj extends DataObj {
   };
 
   handleResetEdit = () => {
+    const {edit_row} = this.state;
+    if(edit_row && !edit_row.nom.empty()) {
+      for(const fld in edit_row._metadata().fields) {
+        this.prev[fld] = edit_row[fld].valueOf();
+      }
+    }
     this.setState({edit_row: null});
   };
 
@@ -112,6 +118,7 @@ class InventoryGoodsObj extends DataObj {
         //denyAddDel
         denyReorder
         ref={(el) => this._materials = el}
+        handleAdd={this.handleAdd}
         btns={[
           <IconButton key="as1" disabled>|</IconButton>,
           <IconButton key="ed1" onClick={this.handleEdit} title="Редактировать строку"><EditIcon /></IconButton>

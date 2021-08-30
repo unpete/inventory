@@ -68,11 +68,17 @@ class InventoryCutsObj extends DataObj {
   handleAdd = () => {
     const {_obj} = this.state;
     /* eslint-disable-next-line */
-    const edit_row = _obj.goods.add(Object.assign({}, this.prev));
+    const edit_row = _obj.materials.add(Object.assign({}, this.prev));
     this.setState({edit_row});
   };
 
   handleResetEdit = () => {
+    const {edit_row} = this.state;
+    if(edit_row && !edit_row.nom.empty()) {
+      for(const fld in edit_row._metadata().fields) {
+        this.prev[fld] = edit_row[fld].valueOf();
+      }
+    }
     this.setState({edit_row: null});
   };
 
@@ -118,6 +124,7 @@ class InventoryCutsObj extends DataObj {
         //denyAddDel
         denyReorder
         ref={(el) => this._materials = el}
+        handleAdd={this.handleAdd}
         btns={[
           <IconButton key="as1" disabled>|</IconButton>,
           <IconButton key="ed1" onClick={this.handleEdit} title="Редактировать строку"><EditIcon /></IconButton>

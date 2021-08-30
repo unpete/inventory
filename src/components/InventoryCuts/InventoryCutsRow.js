@@ -35,11 +35,12 @@ export default function InventoryCutsRow({row, handleClose}) {
     </Toolbar>
     <div style={{maxWidth: 600}}>
       <DataField _obj={row} _fld="nom" isTabular={false} fullWidth/>
-      <DataField _obj={row} _fld="characteristic" isTabular={false} fullWidth/>
+      {/*<DataField _obj={row} _fld="characteristic" isTabular={false} fullWidth/>*/}
       <DataField _obj={row} _fld="clr" _meta={cmeta} isTabular={false} fullWidth/>
-      <DataField _obj={row} _fld="quantity" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="width" isTabular={false} fullWidth/>
-      <DataField _obj={row} _fld="height" isTabular={false} fullWidth/>
+      <DataField _obj={row} _fld="len" isTabular={false} fullWidth/>
+      <DataField _obj={row} _fld="qty" isTabular={false} fullWidth/>
+      <DataField _obj={row} _fld="cell" isTabular={false} fullWidth/>
     </div>
   </>
 

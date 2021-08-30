@@ -28,7 +28,7 @@ export default function InventoryGoodsRow({row, handleClose}) {
     <div style={{maxWidth: 600}}>
       <DataField _obj={row} _fld="nom" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="nom_characteristic" isTabular={false} fullWidth/>
-      <DataField _obj={row} _fld="clr" isTabular={false} fullWidth/>
+      {/*<DataField _obj={row} _fld="clr" isTabular={false} fullWidth/>*/}
       <DataField _obj={row} _fld="quantity" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="recorded_quantity" isTabular={false} fullWidth/>
       <DataField _obj={row} _fld="unit" isTabular={false} fullWidth/>
