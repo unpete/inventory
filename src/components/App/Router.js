@@ -16,8 +16,9 @@ class AppRouter extends React.Component {
 
   render() {
     const {inventory_cuts, inventory_goods} = $p.doc;
-    const {handleIfaceState} = this.props;
-    const handlers = {handleNavigate, handleIfaceState}
+    const {handleIfaceState, meta_loaded, user, complete_loaded} = this.props;
+    const handlers = {handleNavigate, handleIfaceState};
+
     return <Router history={history}>
         <Switch>
           <Route

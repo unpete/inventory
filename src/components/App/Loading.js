@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
+import {FrmLogin} from 'metadata-react/FrmLogin/Proxy/FrmLogin';  // логин и свойства подключения
+import loginStyles from 'metadata-react/FrmLogin/Proxy/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(({breakpoints}) => ({
   root: {
     width: '50vw',
+    [breakpoints.down('sm')]: {
+      width: '90vw',
+    },
   },
   loading: {
     textAlign: 'center',
@@ -26,7 +31,13 @@ export const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
   }
-});
+}));
+
+const Login = loginStyles(FrmLogin);
+
+function handleLogin(login, password) {
+  return $p.adapters.pouch.log_in(login, password);
+}
 
 function Text({classes, meta_loaded, common_loaded, complete_loaded, user}) {
   let text;
@@ -75,16 +86,30 @@ function progress({meta_loaded, common_loaded, complete_loaded, page}) {
 
 function Loading(props) {
   const classes = useStyles();
-  return (
-    <div className={classes.loading}>
-      <header className={classes.header}>
-        <div className={classes.root}>
-          <LinearProgress variant="buffer" {...progress(props)}/>
-          <Text classes={classes} {...props} />
-        </div>
-      </header>
-    </div>
-  );
+
+  const {meta_loaded, common_loaded, user, complete_loaded} = props;
+  let need_auth = meta_loaded && common_loaded && !user.try_log_in && !user.logged_in;
+  if(need_auth && complete_loaded) {
+    const {current_user} = $p;
+    if(current_user && current_user.name == user.name) {
+      need_auth = false;
+    }
+  }
+
+  return <div className={classes.loading}>
+        <header className={classes.header}>
+          <div className={classes.root}>
+            {need_auth ?
+              <Login {...props} handleLogin={handleLogin}/>
+              :
+              <>
+                <LinearProgress variant="buffer" {...progress(props)}/>
+                <Text classes={classes} {...props} />
+              </>
+            }
+          </div>
+        </header>
+      </div>;
 }
 
 

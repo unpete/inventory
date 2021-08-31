@@ -51,6 +51,10 @@ export function init(elm) {
     if(wsql.get_user_param('couch_path') !== job_prm.couch_path && process.env.NODE_ENV !== 'development') {
       wsql.set_user_param('couch_path', job_prm.couch_path);
     }
+    if(!wsql.get_user_param('auth_provider')) {
+      wsql.set_user_param('auth_provider', 'couchdb');
+    }
+
     classes.PouchDB.plugin(proxy_login());
     pouch.init(wsql, job_prm);
 

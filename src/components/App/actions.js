@@ -72,28 +72,19 @@ export function actions(elm) {
         },
         pouch_data_page(page) {
           elm.setState({page});
-        }
-      });
-
-      md.once('predefined_elmnts_inited', () => pouch.emit('pouch_complete_loaded'));
-
-      elm.setState({user: {
-          name: '',
-          logged_in: false,
-          try_log_in: true,
-          log_error: '',
-        }});
-
-      return log_in()
-        .then((user) => {
+        },
+        on_log_in(username) {
           elm.setState({user: {
-              name: user.name || user.id,
+              name: username,
               logged_in: true,
               try_log_in: false,
               log_error: '',
             }});
           return load_ram($p);
-        });
+        },
+      });
+
+      md.once('predefined_elmnts_inited', () => pouch.emit('pouch_complete_loaded'));
 
     });
 }
