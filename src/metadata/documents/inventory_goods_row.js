@@ -27,10 +27,28 @@ export default function inventory_goods_row($p) {
 
     // при изменении реквизита
     value_change(field, type, value) {
-      if(field == 'nom') {
+      switch (field) {
+      case 'nom':
         const v = nom.get(value);
         this.unit = v.storage_unit;
         this.clr = this.nom_characteristic.clr;
+        break;
+      case 'len':
+      case 'width':
+      case 'qty':
+        this[field] = value;
+        if(this.width) {
+          this.quantity = (this.len || 1) * this.width * this.qty / 1000000;
+        }
+        else {
+          this.quantity = this.len * this.qty / 1000;
+        }
+        this.value_change('quantity', '', this.quantity)
+        break;
+      case 'quantity':
+      case 'price':
+        this[field] = value;
+        this.amount = this.quantity * this.price;
       }
     }
   }

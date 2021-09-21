@@ -41,7 +41,7 @@ function log_in() {
       props._suffix = res.suffix || '';
       props._user = res.ref;
 
-      remote.ram = new PouchDB(pouch.dbpath('ram'), {skip_setup: true, owner: pouch, fetch});
+
       remote.doc = new PouchDB(pouch.dbpath('doc'), {skip_setup: true, owner: pouch, fetch});
 
       return users.create(res, false, true);
@@ -57,9 +57,9 @@ export function actions(elm) {
     .then(() => {
       // font-awesome, roboto и стили metadata подгрузим асинхронно
       import('metadata-react/styles/roboto/font.css');
-      import('font-awesome/css/font-awesome.min.css');
+      import('font-awesome/css/font-awesome.min.css')
+        .then(() => import('../../styles/global.css'))
     })
-    .then(() => import('../../styles/global.css'))
     .then(() => {
       const {adapters: {pouch}, md, ui} = $p;
       elm.setState({common_loaded: true});
@@ -74,6 +74,8 @@ export function actions(elm) {
           elm.setState({page});
         },
         on_log_in(username) {
+          const {remote, fetch} = pouch;
+          remote.ram = new PouchDB(pouch.dbpath('ram'), {skip_setup: true, owner: pouch, fetch});
           elm.setState({user: {
               name: username,
               logged_in: true,

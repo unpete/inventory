@@ -2,6 +2,7 @@
 
 import CharacteristicsFrmObj from 'wb-forms/dist/CatCharacteristics/FrmObj';
 import SpecFragment from 'wb-forms/dist/CatCharacteristics/Spec';
+import CatUsersObj from '../../components/CatUsers/CatUsersObj';
 
 export default function ({cat}) {
   cat.forEach((mgr) => {
@@ -10,6 +11,7 @@ export default function ({cat}) {
     }
   });
 
+  cat.users.FrmObj = CatUsersObj;
   cat.characteristics.FrmObj = CharacteristicsFrmObj;
   cat.characteristics.SpecFragment = SpecFragment;
 }
