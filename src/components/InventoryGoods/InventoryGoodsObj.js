@@ -97,7 +97,7 @@ class InventoryGoodsObj extends DataObj {
   renderHead() {
     const {_obj} = this.state;
     return <div style={{maxWidth: 600}}>
-      <DataField _obj={_obj} _fld="number_doc" fullWidth/>
+      <DataField _obj={_obj} _fld="number_doc" fullWidth read_only/>
       <DataField _obj={_obj} _fld="date" fullWidth/>
       <DataField _obj={_obj} _fld="organization" fullWidth/>
       <DataField _obj={_obj} _fld="warehouse" fullWidth/>

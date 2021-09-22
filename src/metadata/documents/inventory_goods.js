@@ -4,13 +4,15 @@
  * Created by Evgeniy Malyarov on 22.08.2021.
  */
 
-export default function inventory_goods_row($p) {
+export default function inventory_goods($p) {
 
-  const {DocInventory_goodsGoodsRow: Proto, utils, doc: {inventory_goods}, cat: {characteristics, clrs, nom}} = $p;
+  const {DocInventory_goodsGoodsRow: Row, DocInventory_goods: Doc, utils,
+    doc: {inventory_goods},
+    cat: {characteristics, clrs, nom, organizations}} = $p;
   const {fields} = inventory_goods.metadata('goods');
   fields.clr = utils._clone(characteristics.metadata('clr'));
 
-  class DocInventory_goodsGoodsRow extends Proto {
+  class DocInventory_goodsGoodsRow extends Row {
 
     get clr() {
       return this.nom_characteristic.clr;
@@ -29,9 +31,10 @@ export default function inventory_goods_row($p) {
     value_change(field, type, value) {
       switch (field) {
       case 'nom':
-        const v = nom.get(value);
-        this.unit = v.storage_unit;
-        this.clr = this.nom_characteristic.clr;
+        const {clr} = this.nom_characteristic;
+        this.nom = value;
+        this.unit = this.nom.storage_unit;
+        this.clr = clr;
         break;
       case 'len':
       case 'width':
@@ -53,5 +56,26 @@ export default function inventory_goods_row($p) {
     }
   }
 
+  class DocInventory_goods extends Doc {
+
+    after_create(user) {
+      this.responsible = user || $p.current_user;
+      const {acl_objs} = this.responsible;
+
+      //Организация
+      acl_objs.find_rows({by_default: true, type: organizations.class_name}, (row) => {
+        this.organization = row.acl_obj;
+        return false;
+      });
+
+      this.date = new Date();
+
+      //Номер документа
+      return this.new_number_doc();
+    }
+
+  }
+
   $p.DocInventory_goodsGoodsRow = DocInventory_goodsGoodsRow;
+  $p.DocInventory_goods = DocInventory_goods;
 }
