@@ -19,6 +19,10 @@ export default function inventory_goods($p) {
     }
 
     set clr(clr) {
+      this.set_clr(clr);
+    }
+
+    set_clr(clr) {
       const {nom, nom_characteristic, _data} = this;
       if(_data._loading || (nom_characteristic.owner === nom && nom_characteristic.clr == clr)) {
         return;
@@ -34,7 +38,7 @@ export default function inventory_goods($p) {
         const {clr} = this.nom_characteristic;
         this.nom = value;
         this.unit = this.nom.storage_unit;
-        this.clr = clr;
+        this.set_clr(clr);
         break;
       case 'len':
       case 'width':

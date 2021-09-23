@@ -17,6 +17,10 @@ export default function inventory_cuts_row($p) {
     }
 
     set clr(clr) {
+      this.set_clr(clr);
+    }
+
+    set_clr(clr) {
       const {nom, characteristic, _data} = this;
       if(_data._loading || (characteristic.owner === nom && characteristic.clr == clr)) {
         return;
@@ -28,9 +32,10 @@ export default function inventory_cuts_row($p) {
     // при изменении реквизита
     value_change(field, type, value) {
       if(field == 'nom') {
-        const v = nom.get(value);
-        this.unit = v.storage_unit;
-        this.clr = this.characteristic.clr;
+        const {clr} = this.characteristic;
+        this.nom = value;
+        this.unit = this.nom.storage_unit;
+        this.set_clr(clr);
       }
     }
   }
