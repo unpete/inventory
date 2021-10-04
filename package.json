@@ -22,15 +22,15 @@
   "proxy2": "http://localhost:3016/",
   "dependencies": {
     "md5-file": "^5.0",
-    "metadata-abstract-ui": "2.0.26-beta.2",
-    "metadata-core": "2.0.26-beta.2",
-    "metadata-pouchdb": "2.0.26-beta.2",
-    "metadata-react": "2.0.26-beta.2",
-    "metadata-superlogin": "2.0.26-beta.2",
+    "metadata-abstract-ui": "2.0.26-beta.3",
+    "metadata-core": "2.0.26-beta.3",
+    "metadata-pouchdb": "2.0.26-beta.3",
+    "metadata-react": "2.0.26-beta.3",
+    "metadata-superlogin": "2.0.26-beta.3",
     "react-resize-layout": "^0.2.3",
     "react-router-dom": "^5.2.0",
     "react-treebeard": "^3.2.4",
-    "wb-core": "github:oknosoft/windowbuilder-core#fcc77dc7fd8ddf8e5a29917985ce8ff48fc0e3c5",
+    "wb-core": "github:oknosoft/windowbuilder-core#232543071765031d8bdfbbc9c99c25a339422af2",
     "wb-forms": "github:oknosoft/windowbuilder-forms#32b577e51f105e2dac56bea9612ac74e51b5879d"
   },
   "devDependencies": {
