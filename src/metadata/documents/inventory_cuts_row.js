@@ -20,9 +20,9 @@ export default function inventory_cuts_row($p) {
       this.set_clr(clr);
     }
 
-    set_clr(clr) {
+    set_clr(clr, force) {
       const {nom, characteristic, _data} = this;
-      if(_data._loading || (characteristic.owner === nom && characteristic.clr == clr)) {
+      if((!force && _data._loading) || (characteristic.owner === nom && characteristic.clr == clr)) {
         return;
       }
       const cx = characteristics.find({owner: nom, clr});
@@ -35,7 +35,7 @@ export default function inventory_cuts_row($p) {
         const {clr} = this.characteristic;
         this.nom = value;
         this.unit = this.nom.storage_unit;
-        this.set_clr(clr);
+        this.set_clr(clr, true);
       }
     }
   }

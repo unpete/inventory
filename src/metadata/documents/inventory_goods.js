@@ -22,12 +22,13 @@ export default function inventory_goods($p) {
       this.set_clr(clr);
     }
 
-    set_clr(clr) {
+    set_clr(clr, force) {
       const {nom, nom_characteristic, _data} = this;
-      if(_data._loading || (nom_characteristic.owner === nom && nom_characteristic.clr == clr)) {
+      if((!force && _data._loading) || (nom_characteristic.owner === nom && nom_characteristic.clr == clr)) {
         return;
       }
-      const cx = characteristics.find({owner: nom, clr});
+      const acx = characteristics.find_rows({owner: nom, clr});
+      const cx = acx[0];
       this.nom_characteristic = cx ? cx : '';
     }
 
@@ -38,7 +39,7 @@ export default function inventory_goods($p) {
         const {clr} = this.nom_characteristic;
         this.nom = value;
         this.unit = this.nom.storage_unit;
-        this.set_clr(clr);
+        this.set_clr(clr, true);
         break;
       case 'len':
       case 'width':
