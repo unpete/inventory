@@ -3,7 +3,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/styles';
 import DataField from 'metadata-react/DataField';
-import CloseBtn from 'wb-forms/dist/Common/CloseBtn';
+import CloseBtn from 'metadata-react/App/CloseButton';
 
 export const styles = makeStyles(theme => ({
   fullFlex: {

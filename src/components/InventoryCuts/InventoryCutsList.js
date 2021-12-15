@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {DynList} from 'metadata-react/DynList/DynList';
-import CloseBtn from 'wb-forms/dist/Common/CloseBtn';
+import CloseBtn from 'metadata-react/App/CloseButton';
 
 export default function InventoryCutsList({title, handleNavigate, handleIfaceState}) {
 
